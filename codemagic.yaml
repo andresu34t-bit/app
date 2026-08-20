@@ -11,39 +11,36 @@ workflows:
     scripts:
       - name: Crear proyecto Flutter base limpio
         script: |
-          # Crear proyecto base con flutter create (genera android/ completo y correcto)
           flutter create --org com.example --project-name whatsapp_webview /tmp/wa_base
           
           # Reemplazar lib/ con nuestro código
           rm -rf /tmp/wa_base/lib
           cp -rf lib /tmp/wa_base/lib
           
-          # Reemplazar pubspec.yaml con el nuestro
+          # Reemplazar pubspec.yaml
           cp pubspec.yaml /tmp/wa_base/pubspec.yaml
           
-          # Reemplazar AndroidManifest con el nuestro
+          # Reemplazar AndroidManifest
           cp android/app/src/main/AndroidManifest.xml \
              /tmp/wa_base/android/app/src/main/AndroidManifest.xml
           
-          # Reemplazar MainActivity con el nuestro
+          # Reemplazar MainActivity
+          mkdir -p /tmp/wa_base/android/app/src/main/kotlin/com/example/whatsapp_webview
           cp android/app/src/main/kotlin/com/example/whatsapp_webview/MainActivity.kt \
              /tmp/wa_base/android/app/src/main/kotlin/com/example/whatsapp_webview/MainActivity.kt
           
           # Copiar XMLs de recursos
+          mkdir -p /tmp/wa_base/android/app/src/main/res/xml
           cp android/app/src/main/res/xml/file_paths.xml \
-             /tmp/wa_base/android/app/src/main/res/xml/file_paths.xml 2>/dev/null || \
-             (mkdir -p /tmp/wa_base/android/app/src/main/res/xml && \
-              cp android/app/src/main/res/xml/file_paths.xml \
-                 /tmp/wa_base/android/app/src/main/res/xml/file_paths.xml)
-          
+             /tmp/wa_base/android/app/src/main/res/xml/file_paths.xml
           cp android/app/src/main/res/xml/network_security_config.xml \
-             /tmp/wa_base/android/app/src/main/res/xml/network_security_config.xml 2>/dev/null || \
-             (mkdir -p /tmp/wa_base/android/app/src/main/res/xml && \
-              cp android/app/src/main/res/xml/network_security_config.xml \
-                 /tmp/wa_base/android/app/src/main/res/xml/network_security_config.xml)
+             /tmp/wa_base/android/app/src/main/res/xml/network_security_config.xml
           
-          # Movernos al proyecto base
-          cd /tmp/wa_base
+          # *** IMPORTANTE: copiar nuestro build.gradle con NDK y desugaring ***
+          cp android/app/build.gradle /tmp/wa_base/android/app/build.gradle
+          
+          # Crear assets dir
+          mkdir -p /tmp/wa_base/assets/images
 
       - name: Instalar dependencias
         script: |
