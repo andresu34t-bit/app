@@ -4,12 +4,12 @@ version: 1.0.0+1
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: ^4.7.0
+  webview_flutter: ^4.9.0
   webview_flutter_android: ^3.16.0
   webview_flutter_wkwebview: ^3.14.0
   permission_handler: ^11.3.1
