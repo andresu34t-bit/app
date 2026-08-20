@@ -1,0 +1,29 @@
+name: whatsapp_webview
+description: WhatsApp WebView client - Educational purposes only
+version: 1.0.0+1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  webview_flutter: ^4.7.0
+  webview_flutter_android: ^3.16.0
+  webview_flutter_wkwebview: ^3.14.0
+  permission_handler: ^11.3.1
+  flutter_local_notifications: ^17.2.2
+  connectivity_plus: ^6.0.3
+  flutter_secure_storage: ^9.2.2
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
