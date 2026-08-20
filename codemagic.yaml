@@ -1,0 +1,31 @@
+workflows:
+  android-debug:
+    name: Android APK Debug
+    max_build_duration: 30
+    instance_type: mac_mini_m2   # o linux_x2 si quieres gratis
+
+    environment:
+      flutter: 3.22.0
+      java: 17
+
+    scripts:
+      - name: Instalar dependencias
+        script: flutter pub get
+
+      - name: Compilar APK debug
+        script: |
+          flutter build apk \
+            --debug \
+            --no-tree-shake-icons \
+            --target-platform android-arm,android-arm64
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+
+    publishing:
+      email:
+        recipients:
+          - andresu34t@gmail.com
+        notify:
+          success: true
+          failure: true
